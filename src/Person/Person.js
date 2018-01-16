@@ -1,8 +1,8 @@
 import React from 'react'
 
-
-const person = () => {
-  return <p>I'm a person!</p>
-}
+// props pull the attributes assigned in the App.js code
+const person = (props) => {
+  return <p>I'm a {props.name} and I am {props.age} years old!</p>
+};
 
 export default person;
