@@ -3,6 +3,7 @@ import './App.css';
 // give person uppercase name, can be anything but should be the const
 import Person from './Person/Person.js';
 
+
 class App extends Component {
   // state only available when extending components. Not in fucntion components
   state = {
@@ -19,21 +20,45 @@ class App extends Component {
     this.setState({
       persons: [
         {name: newName, age: 24},
-        {name: newName, age: 20},
-        {name: newName, age: 22},
+        {name: 'Bob', age: 20},
+        {name: 'Olivia', age: 22},
       ] 
     })
   }
+
+  nameChangeHandler = (event) => {
+    this.setState({
+      persons: [
+        {name: event.target.value, age:24},
+        {name: 'Bob', age: 20},
+        {name: 'Olivia', age: 22},
+      ]
+    })
+  }
+  
+
   render() {
+    const style = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer'
+    };
+
     return (
       <div className="App">
         <h1>Hi, I'm a react App</h1>
         {/* uppercase C in onClick unlike normal JS */}
         {/* if you add () at the end of onclick function it executes the function immediately. So do not add () */}
-        <button onClick={() => this.switchNameHandler('BOOOOO')}>Switch Name</button>
+        <button 
+          style={style}
+          onClick={() => this.switchNameHandler('BOOOOO')}>Switch Name
+        </button>
         <Person 
           name={this.state.persons[0].name} 
           age={this.state.persons[0].age}
+          changed={this.nameChangeHandler}
         />
         <Person 
           name={this.state.persons[1].name} 
@@ -42,7 +67,7 @@ class App extends Component {
           click={this.switchNameHandler.bind(this, 'Ian!!!!')}>My Hobbies: Racing</Person>
         <Person 
           name={this.state.persons[2].name} 
-            age={this.state.persons[0].age}
+          age={this.state.persons[0].age}
         />
       </div>
       // code above is processed like the code below
