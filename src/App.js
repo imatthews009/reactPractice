@@ -11,7 +11,8 @@ class App extends Component {
       {name: 'Ian', age: 25},
       {name: 'Bob', age: 20},
       {name: 'Olivia', age: 22},
-    ]
+    ],
+    showPersons: false,
   }
   // handler means handling event handler
   switchNameHandler = (newName) => {
@@ -36,6 +37,10 @@ class App extends Component {
     })
   }
   
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow});
+  }
 
   render() {
     const style = {
@@ -53,22 +58,27 @@ class App extends Component {
         {/* if you add () at the end of onclick function it executes the function immediately. So do not add () */}
         <button 
           style={style}
-          onClick={() => this.switchNameHandler('BOOOOO')}>Switch Name
+          onClick={this.togglePersonsHandler}>Show People
         </button>
-        <Person 
-          name={this.state.persons[0].name} 
-          age={this.state.persons[0].age}
-          changed={this.nameChangeHandler}
-        />
-        <Person 
-          name={this.state.persons[1].name} 
-          age={this.state.persons[0].age}
-          // passing the function that changes the state to the person function in person.js
-          click={this.switchNameHandler.bind(this, 'Ian!!!!')}>My Hobbies: Racing</Person>
-        <Person 
-          name={this.state.persons[2].name} 
-          age={this.state.persons[0].age}
-        />
+        { 
+          this.state.showPersons ? 
+            <div>
+              <Person 
+                name={this.state.persons[0].name} 
+                age={this.state.persons[0].age}
+                changed={this.nameChangeHandler}
+              />
+              <Person 
+                name={this.state.persons[1].name} 
+                age={this.state.persons[0].age}
+                // passing the function that changes the state to the person function in person.js
+                click={this.switchNameHandler.bind(this, 'Ian!!!!')}>My Hobbies: Racing</Person>
+              <Person 
+                name={this.state.persons[2].name} 
+                age={this.state.persons[0].age}
+              />
+            </div> : null
+        }
       </div>
       // code above is processed like the code below
       // React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work?'))
