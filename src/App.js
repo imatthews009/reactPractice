@@ -8,9 +8,9 @@ class App extends Component {
   // state only available when extending components. Not in fucntion components
   state = {
     persons: [
-      {name: 'Ian', age: 25},
-      {name: 'Bob', age: 20},
-      {name: 'Olivia', age: 22},
+      {id: 'alsdkfj', name: 'Ian', age: 25},
+      {id: 'kdjfkd', name: 'Bob', age: 20},
+      {id: 'kdjkfj', name: 'Olivia', age: 22},
     ],
     showPersons: false,
   }
@@ -27,14 +27,29 @@ class App extends Component {
     })
   }
 
-  nameChangeHandler = (event) => {
-    this.setState({
-      persons: [
-        {id: 'ad', name: event.target.value, age:24},
-        {id: 'sdfd', name: 'Bob', age: 20},
-        {id: 'asdfdfw', name: 'Olivia', age: 22},
-      ]
-    })
+  nameChangeHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
+    });
+
+    // using spread operator so we do not mutate the state. created new object
+    const person = {
+      ...this.state.persons[personIndex]
+    }
+
+    person.name = event.target.value; 
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
+    this.setState({persons: persons});
+
+    // this.setState({
+    //   persons: [
+    //     {name: event.target.value, age:24},
+    //     {name: 'Bob', age: 20},
+    //     {name: 'Olivia', age: 22},
+    //   ]
+    // })
   }
   
   togglePersonsHandler = () => {
@@ -68,7 +83,8 @@ class App extends Component {
                     click={() => this.deletePersonHandler(index)} 
                     name={person.name} 
                     age={person.age}
-                    key={person.id}/>
+                    key={person.id}
+                    changed={(event) => this.nameChangeHandler(event, person.id)}/>
           })}
         </div>
       );
