@@ -65,16 +65,9 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-    };
 
     let persons = null;
+    let btnClass = '';
 
     if (this.state.showPersons) {
       persons = (
@@ -89,11 +82,7 @@ class App extends Component {
           })}
         </div>
       );
-      style.backgroundColor = 'red';
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
+      btnClass = classes.red
     }
 
     let assignedClasses = [];
@@ -110,8 +99,7 @@ class App extends Component {
         {/* uppercase C in onClick unlike normal JS */}
         {/* if you add () at the end of onclick function it executes the function immediately. So do not add () */}
         <button 
-          style={style}
-          onClick={this.togglePersonsHandler}>Show People
+          onClick={this.togglePersonsHandler} className={btnClass}>Show People
         </button>
         {persons}
       </div>
