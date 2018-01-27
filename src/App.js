@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Radium, {StyleRoot}from 'radium';
 // give person uppercase name, can be anything but should be the const
 import Person from './Person/Person.js';
 
@@ -71,7 +72,11 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     };
 
     let persons = null;
@@ -90,6 +95,10 @@ class App extends Component {
         </div>
       );
       style.backgroundColor = 'red';
+      style[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      }
     }
 
     let classes = [];
@@ -97,24 +106,26 @@ class App extends Component {
       classes.push('red'); //classes red
     } 
     if (this.state.persons.length <=1) {
-      classes.push('bold'); //classes red and bold
+      classes.push('bold') //classes red and bold
     }
 
     return (
-      <div className="App">
-        <h1 className={classes.join(' ')}>Hi, I'm a react App</h1>
-        {/* uppercase C in onClick unlike normal JS */}
-        {/* if you add () at the end of onclick function it executes the function immediately. So do not add () */}
-        <button 
-          style={style}
-          onClick={this.togglePersonsHandler}>Show People
-        </button>
-        {persons}
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <h1 className={classes.join(' ')}>Hi, I'm a react App</h1>
+          {/* uppercase C in onClick unlike normal JS */}
+          {/* if you add () at the end of onclick function it executes the function immediately. So do not add () */}
+          <button 
+            style={style}
+            onClick={this.togglePersonsHandler}>Show People
+          </button>
+          {persons}
+        </div>
+      </StyleRoot>
       // code above is processed like the code below
       // React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work?'))
     );
   } 
 }
 
-export default App;
+export default Radium(App);
