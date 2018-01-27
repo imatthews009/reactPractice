@@ -66,7 +66,8 @@ class App extends Component {
 
   render() {
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -88,11 +89,20 @@ class App extends Component {
           })}
         </div>
       );
+      style.backgroundColor = 'red';
+    }
+
+    let classes = [];
+    if (this.state.persons.length <=2) {
+      classes.push('red'); //classes red
+    } 
+    if (this.state.persons.length <=1) {
+      classes.push('bold'); //classes red and bold
     }
 
     return (
       <div className="App">
-        <h1>Hi, I'm a react App</h1>
+        <h1 className={classes.join(' ')}>Hi, I'm a react App</h1>
         {/* uppercase C in onClick unlike normal JS */}
         {/* if you add () at the end of onclick function it executes the function immediately. So do not add () */}
         <button 
