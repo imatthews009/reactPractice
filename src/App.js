@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import Radium, {StyleRoot}from 'radium';
 // give person uppercase name, can be anything but should be the const
 import Person from './Person/Person.js';
 
@@ -73,10 +72,6 @@ class App extends Component {
       border: '1px solid blue',
       padding: '8px',
       cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
     };
 
     let persons = null;
@@ -110,22 +105,20 @@ class App extends Component {
     }
 
     return (
-      <StyleRoot>
-        <div className="App">
-          <h1 className={classes.join(' ')}>Hi, I'm a react App</h1>
-          {/* uppercase C in onClick unlike normal JS */}
-          {/* if you add () at the end of onclick function it executes the function immediately. So do not add () */}
-          <button 
-            style={style}
-            onClick={this.togglePersonsHandler}>Show People
-          </button>
-          {persons}
-        </div>
-      </StyleRoot>
+      <div className="App">
+        <h1 className={classes.join(' ')}>Hi, I'm a react App</h1>
+        {/* uppercase C in onClick unlike normal JS */}
+        {/* if you add () at the end of onclick function it executes the function immediately. So do not add () */}
+        <button 
+          style={style}
+          onClick={this.togglePersonsHandler}>Show People
+        </button>
+        {persons}
+      </div>
       // code above is processed like the code below
       // React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work?'))
     );
   } 
 }
 
-export default Radium(App);
+export default App;
