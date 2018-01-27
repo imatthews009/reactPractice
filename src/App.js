@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 // give person uppercase name, can be anything but should be the const
 import Person from './Person/Person.js';
 
@@ -96,17 +96,17 @@ class App extends Component {
       }
     }
 
-    let classes = [];
+    let assignedClasses = [];
     if (this.state.persons.length <=2) {
-      classes.push('red'); //classes red
+      assignedClasses.push(classes.red); //classes red
     } 
     if (this.state.persons.length <=1) {
-      classes.push('bold') //classes red and bold
+      assignedClasses.push(classes.bold) //classes red and bold
     }
 
     return (
-      <div className="App">
-        <h1 className={classes.join(' ')}>Hi, I'm a react App</h1>
+      <div className={classes.App}>
+        <h1 className={assignedClasses.join(' ')}>Hi, I'm a react App</h1>
         {/* uppercase C in onClick unlike normal JS */}
         {/* if you add () at the end of onclick function it executes the function immediately. So do not add () */}
         <button 
