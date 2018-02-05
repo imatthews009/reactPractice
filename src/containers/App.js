@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import classes from './App.css';
 // give person uppercase name, can be anything but should be the const
-import Person from './Person/Person.js';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 
 class App extends Component {
@@ -42,14 +43,6 @@ class App extends Component {
     persons[personIndex] = person;
 
     this.setState({persons: persons});
-
-    // this.setState({
-    //   persons: [
-    //     {name: event.target.value, age:24},
-    //     {name: 'Bob', age: 20},
-    //     {name: 'Olivia', age: 22},
-    //   ]
-    // })
   }
   
   togglePersonsHandler = () => {
@@ -67,44 +60,28 @@ class App extends Component {
   render() {
 
     let persons = null;
-    let btnClass = '';
 
     if (this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map((person, index) => {
-            return <Person
-                    click={() => this.deletePersonHandler(index)} 
-                    name={person.name} 
-                    age={person.age}
-                    key={person.id}
-                    changed={(event) => this.nameChangeHandler(event, person.id)}/>
-          })}
+          <Persons
+            persons={this.state.persons}
+            clicked={this.deletePersonHandler} 
+            changed={this.nameChangeHandler}/>
         </div>
       );
-      btnClass = classes.red
     }
 
-    let assignedClasses = [];
-    if (this.state.persons.length <=2) {
-      assignedClasses.push(classes.red); //classes red
-    } 
-    if (this.state.persons.length <=1) {
-      assignedClasses.push(classes.bold) //classes red and bold
-    }
+    
 
     return (
       <div className={classes.App}>
-        <h1 className={assignedClasses.join(' ')}>Hi, I'm a react App</h1>
-        {/* uppercase C in onClick unlike normal JS */}
-        {/* if you add () at the end of onclick function it executes the function immediately. So do not add () */}
-        <button 
-          onClick={this.togglePersonsHandler} className={btnClass}>Show People
-        </button>
+        <Cockpit 
+          showPersons = {this.state.showPersons}
+          persons={this.state.persons}
+          clicked={this.togglePersonsHandler} />
         {persons}
       </div>
-      // code above is processed like the code below
-      // React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work?'))
     );
   } 
 }
