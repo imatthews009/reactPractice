@@ -6,15 +6,28 @@ import Cockpit from '../components/Cockpit/Cockpit';
 
 
 class App extends Component {
-  // state only available when extending components. Not in fucntion components
-  state = {
-    persons: [
-      {id: 'alsdkfj', name: 'Ian', age: 25},
-      {id: 'kdjfkd', name: 'Bob', age: 20},
-      {id: 'kdjkfj', name: 'Olivia', age: 22},
-    ],
-    showPersons: false,
+  constructor(props) {
+    super(props);
+    console.log('hello', props);
+    this.state = {
+      persons: [
+        {id: 'alsdkfj', name: 'Ian', age: 25},
+        {id: 'kdjfkd', name: 'Bob', age: 20},
+        {id: 'kdjkfj', name: 'Olivia', age: 22},
+      ],
+      showPersons: false,
+    }
   }
+
+  componentWillMount() {
+    
+  }
+
+  componentDidMount() {
+
+  }
+  // state only available when extending components. Not in fucntion components
+ 
   // handler means handling event handler
   switchNameHandler = (newName) => {
     // console.log('Was clicked');
